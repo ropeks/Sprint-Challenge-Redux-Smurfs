@@ -16,12 +16,24 @@ export function getSmurfs() {
 
     axios.get('http://localhost:3333/smurfs')
       .then(res => {
-        console.log(res.data);
         dispatch({ type: GET_SMURFS_SUCCESS, payload: res.data })
       })
       .catch(err => {
-        console.log(err.message);
         dispatch({ type: GET_SMURFS_FAILURE, payload: err.message })
+      })
+  }
+}
+
+export function addSmurf(smurf) {
+  return (dispatch) => {
+    dispatch({ type: ADD_SMURF })
+
+    axios.post('http://localhost:3333/smurfs', smurf)
+      .then(res => {
+        dispatch({ type: ADD_SMURF_SUCCESS, payload: res.data })
+      })
+      .catch(err => {
+        dispatch({ type: ADD_SMURF_FAILURE, payload: err.message })
       })
   }
 }
